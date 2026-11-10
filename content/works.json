@@ -3,144 +3,404 @@
     "slug": "haioku",
     "title": "廃屋配信",
     "author": "popon",
-    "genres": ["ホラー", "サウンドノベル"],
+    "genres": [
+      "ホラー",
+      "サウンドノベル"
+    ],
     "synopsis": "登録者 300 人の心霊配信者は、山奥の廃屋から生配信を始める。コメント欄だけが、彼の見ていない物に気づいていた——。視聴者のコメントと一緒に進む、縦型のホラーノベル。",
     "authorNote": "夜、部屋を暗くしてイヤホンで遊ぶのがおすすめです。配信のコメント欄も読んでみてください。",
     "minutes": 15,
     "endings": 2,
     "age": "15+",
-    "warnings": ["blood", "loud", "flash"],
-    "cover": { "image": "covers/haioku-gate.jpg", "title": "vertical" },
-    "hero": { "image": "covers/haioku.png", "position": "50% 22%", "titleInArt": true },
+    "warnings": [
+      "blood",
+      "loud",
+      "flash"
+    ],
+    "cover": {
+      "image": "covers/haioku-gate.jpg",
+      "title": "vertical"
+    },
+    "hero": {
+      "image": "covers/haioku.png",
+      "position": "50% 22%",
+      "titleInArt": true
+    },
     "playUrl": "https://ababup1192.github.io/haioku-live/",
     "publishedAt": "2026-11-09",
-    "tags": ["pick", "popular"],
-    "mock": false
+    "tags": [
+      "pick",
+      "popular"
+    ],
+    "mock": false,
+    "episodes": [
+      {
+        "label": "第1話",
+        "title": "廃屋に入る",
+        "minutes": 15,
+        "price": 0,
+        "playUrl": "https://ababup1192.github.io/haioku-live/",
+        "coming": false,
+        "date": "2026-11-09"
+      },
+      {
+        "label": "第2話",
+        "title": "（モック）二階の配信",
+        "minutes": 15,
+        "price": 120,
+        "playUrl": null,
+        "coming": false,
+        "date": "2026-11-09"
+      },
+      {
+        "label": "第3話",
+        "title": "（モック）消えたコメント",
+        "minutes": 15,
+        "price": 120,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-11-23"
+      },
+      {
+        "label": "最終話",
+        "title": "（モック）配信終了",
+        "minutes": 20,
+        "price": 160,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-11-30"
+      }
+    ]
   },
   {
     "slug": "kankan",
     "title": "カン、カン",
     "author": "abab",
-    "genres": ["ホラー", "怪談"],
+    "genres": [
+      "ホラー",
+      "怪談"
+    ],
     "synopsis": "深夜、公衆電話の受話器の向こうから、カン、カン、と何かを叩く音がする。2ちゃんねるの怪談「カン、カン」（後日談の手前まで）を、縦の画面で読むホラーノベルにした物。",
     "authorNote": "タップで読み進めます。音を出して、暗い部屋で。出典は 2ch の「洒落にならない怖い話」です。",
     "minutes": 10,
     "endings": 1,
     "age": "12+",
-    "warnings": ["loud", "jumpscare"],
-    "cover": { "image": "covers/kankan.jpg", "title": "vertical" },
-    "hero": { "image": "covers/kankan2.jpg", "position": "50% 40%" },
+    "warnings": [
+      "loud",
+      "jumpscare"
+    ],
+    "cover": {
+      "image": "covers/kankan.jpg",
+      "title": "vertical"
+    },
+    "hero": {
+      "image": "covers/kankan2.jpg",
+      "position": "50% 40%"
+    },
     "playUrl": "https://ababup1192.github.io/kankan/",
     "publishedAt": "2026-11-09",
-    "tags": ["pick", "short"],
-    "mock": false
+    "tags": [
+      "pick",
+      "short"
+    ],
+    "mock": false,
+    "episodes": [
+      {
+        "label": "全1話",
+        "title": "カン、カン",
+        "minutes": 10,
+        "price": 0,
+        "playUrl": "https://ababup1192.github.io/kankan/",
+        "coming": false,
+        "date": "2026-11-09"
+      }
+    ]
   },
   {
     "slug": "blood-scale",
     "title": "血鱗",
     "author": "newtron",
-    "genres": ["ダーク童話", "ビジュアルノベル"],
+    "genres": [
+      "ダーク童話",
+      "ビジュアルノベル"
+    ],
     "synopsis": "海の底の魔女の住処へ、少女はひとりで降りていく。水彩の絵本のようなビジュアルノベルの序章「海の魔女の住処」。",
     "authorNote": "序章です。続きを作っています。",
     "minutes": 20,
     "endings": 1,
     "age": "15+",
-    "warnings": ["blood", "blade"],
-    "cover": { "image": "covers/witch.png", "title": "bottom", "background": "linear-gradient(180deg,#0d3a4a,#06141c)", "position": "50% 100%", "size": "92% auto" },
-    "hero": { "image": "covers/blood-scale.png", "position": "50% 28%", "size": "auto 190%", "titleInArt": true },
+    "warnings": [
+      "blood",
+      "blade"
+    ],
+    "cover": {
+      "image": "covers/witch.png",
+      "title": "bottom",
+      "background": "linear-gradient(180deg,#0d3a4a,#06141c)",
+      "position": "50% 100%",
+      "size": "92% auto"
+    },
+    "hero": {
+      "image": "covers/blood-scale.png",
+      "position": "50% 28%",
+      "size": "auto 190%",
+      "titleInArt": true
+    },
     "playUrl": "https://ababup1192.github.io/blood-scale/",
     "publishedAt": "2026-11-09",
-    "tags": ["pick", "new"],
-    "mock": false
+    "tags": [
+      "pick",
+      "new"
+    ],
+    "mock": false,
+    "episodes": [
+      {
+        "label": "プロローグ",
+        "title": "海の魔女の住処",
+        "minutes": 20,
+        "price": 0,
+        "playUrl": "https://ababup1192.github.io/blood-scale/",
+        "coming": false,
+        "date": "2026-11-09"
+      },
+      {
+        "label": "第1話",
+        "title": "（モック）鱗の代価",
+        "minutes": 20,
+        "price": 0,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-11-28"
+      }
+    ]
   },
   {
     "slug": "natsukusa",
     "title": "夏草の駅",
     "author": "natsuno",
-    "genres": ["青春", "選択肢あり"],
+    "genres": [
+      "青春",
+      "選択肢あり"
+    ],
     "synopsis": "十年ぶりに祖母の町へ帰った「私」が、幼なじみの千夏と、祖母が遺した真鍮の鍵の行き先をたどる。選び方で結末が 3 つに分かれる。（モック: まだ遊べません）",
     "authorNote": "結末は 3 つあります。",
     "minutes": 5,
     "endings": 3,
     "age": "全年齢",
     "warnings": [],
-    "cover": { "image": "covers/natsu-station.jpg", "title": "bottom" },
-    "hero": { "image": "covers/natsukusa.png", "position": "50% 26%", "size": "auto 190%" },
+    "cover": {
+      "image": "covers/natsu-station.jpg",
+      "title": "bottom"
+    },
+    "hero": {
+      "image": "covers/natsukusa.png",
+      "position": "50% 26%",
+      "size": "auto 190%"
+    },
     "playUrl": null,
     "publishedAt": "2026-11-01",
-    "tags": ["short"],
-    "mock": true
+    "tags": [
+      "short"
+    ],
+    "mock": true,
+    "episodes": [
+      {
+        "label": "全1話",
+        "title": "夏草の駅",
+        "minutes": 5,
+        "price": 0,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-12-05"
+      }
+    ]
   },
   {
     "slug": "mock-library",
     "title": "雨の日の図書室",
     "author": "amamiya",
-    "genres": ["青春", "ミステリー"],
+    "genres": [
+      "青春",
+      "ミステリー"
+    ],
     "synopsis": "（モック）雨の放課後、誰もいない図書室で、貸し出しカードに知らない名前が増えていく。",
     "authorNote": "",
     "minutes": 10,
     "endings": 2,
     "age": "全年齢",
     "warnings": [],
-    "cover": { "image": null, "title": "vertical", "background": "linear-gradient(160deg,#5b7a8c,#22313d)" },
+    "cover": {
+      "image": null,
+      "title": "vertical",
+      "background": "linear-gradient(160deg,#5b7a8c,#22313d)"
+    },
     "hero": null,
     "playUrl": null,
     "publishedAt": "2026-10-20",
-    "tags": ["new"],
-    "mock": true
+    "tags": [
+      "new"
+    ],
+    "mock": true,
+    "episodes": [
+      {
+        "label": "第1話",
+        "title": "（モック）貸し出しカード",
+        "minutes": 10,
+        "price": 0,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-11-21"
+      },
+      {
+        "label": "第2話",
+        "title": "（モック）知らない名前",
+        "minutes": 10,
+        "price": 80,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-12-12"
+      }
+    ]
   },
   {
     "slug": "mock-konbini",
     "title": "午前二時のコンビニ",
     "author": "shinya",
-    "genres": ["ホラー"],
+    "genres": [
+      "ホラー"
+    ],
     "synopsis": "（モック）深夜のコンビニのレジに、毎晩同じ時刻に同じ客が来る。",
     "authorNote": "",
     "minutes": 5,
     "endings": 1,
     "age": "12+",
-    "warnings": ["jumpscare"],
-    "cover": { "image": null, "title": "vertical", "background": "linear-gradient(160deg,#3f6b4f,#13241a)" },
+    "warnings": [
+      "jumpscare"
+    ],
+    "cover": {
+      "image": null,
+      "title": "vertical",
+      "background": "linear-gradient(160deg,#3f6b4f,#13241a)"
+    },
     "hero": null,
     "playUrl": null,
     "publishedAt": "2026-10-12",
-    "tags": ["short"],
-    "mock": true
+    "tags": [
+      "short"
+    ],
+    "mock": true,
+    "episodes": [
+      {
+        "label": "全1話",
+        "title": "（モック）午前二時",
+        "minutes": 5,
+        "price": 0,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-12-01"
+      }
+    ]
   },
   {
     "slug": "mock-school",
     "title": "旧校舎の七不思議",
     "author": "amamiya",
-    "genres": ["ホラー", "選択肢あり"],
+    "genres": [
+      "ホラー",
+      "選択肢あり"
+    ],
     "synopsis": "（モック）取り壊しの決まった旧校舎で、七つ目の不思議だけが誰にも語られていない。",
     "authorNote": "",
     "minutes": 25,
     "endings": 4,
     "age": "12+",
-    "warnings": ["jumpscare"],
-    "cover": { "image": null, "title": "vertical", "background": "linear-gradient(160deg,#6e3b3b,#1f1010)" },
+    "warnings": [
+      "jumpscare"
+    ],
+    "cover": {
+      "image": null,
+      "title": "vertical",
+      "background": "linear-gradient(160deg,#6e3b3b,#1f1010)"
+    },
     "hero": null,
     "playUrl": null,
     "publishedAt": "2026-10-05",
     "tags": [],
-    "mock": true
+    "mock": true,
+    "episodes": [
+      {
+        "label": "プロローグ",
+        "title": "（モック）取り壊しの日",
+        "minutes": 5,
+        "price": 0,
+        "playUrl": null,
+        "coming": false,
+        "date": "2026-11-02"
+      },
+      {
+        "label": "第1話",
+        "title": "（モック）一つ目の不思議",
+        "minutes": 10,
+        "price": 100,
+        "playUrl": null,
+        "coming": false,
+        "date": "2026-11-05"
+      },
+      {
+        "label": "第2話",
+        "title": "（モック）音楽室",
+        "minutes": 10,
+        "price": 100,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-11-14"
+      },
+      {
+        "label": "第3話",
+        "title": "（モック）七つ目",
+        "minutes": 15,
+        "price": 150,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-12-19"
+      }
+    ]
   },
   {
     "slug": "mock-letter",
     "title": "白い手紙",
     "author": "shinya",
-    "genres": ["ミステリー"],
+    "genres": [
+      "ミステリー"
+    ],
     "synopsis": "（モック）差出人のない白い手紙が、毎朝ポストに一通ずつ届く。",
     "authorNote": "",
     "minutes": 5,
     "endings": 1,
     "age": "全年齢",
     "warnings": [],
-    "cover": { "image": null, "title": "vertical", "background": "linear-gradient(160deg,#b9a58a,#5a4a35)" },
+    "cover": {
+      "image": null,
+      "title": "vertical",
+      "background": "linear-gradient(160deg,#b9a58a,#5a4a35)"
+    },
     "hero": null,
     "playUrl": null,
     "publishedAt": "2026-09-28",
-    "tags": ["short"],
-    "mock": true
+    "tags": [
+      "short"
+    ],
+    "mock": true,
+    "episodes": [
+      {
+        "label": "全1話",
+        "title": "（モック）白い手紙",
+        "minutes": 5,
+        "price": 0,
+        "playUrl": null,
+        "coming": true,
+        "date": "2026-12-20"
+      }
+    ]
   }
 ]

@@ -1,10 +1,10 @@
-module WorkPage exposing (startSheet, view)
+module WorkPage exposing (buySheet, startSheet, view)
 
-{-| 作品の頁と、その上に重ねる「遊ぶ前のシート」。
-シートは別の URL（/works/<slug>/start）にして、JS の状態を持たずに静的な頁のまま開け閉めする。
+{-| 作品の頁と、その上に重ねる「遊ぶ前のシート」「購入のシート（モック）」。
+シートは別の URL（/works/<slug>/start・/works/<slug>/buy/<n>）にして、JS の状態を持たずに静的な頁のまま開け閉めする。
 -}
 
-import Catalog exposing (Catalog, Work)
+import Catalog exposing (Catalog, Episode, EpisodeState(..), Work)
 import Html exposing (Html, a, button, div, h1, h2, h4, p, small, span, text)
 import Html.Attributes exposing (class, href, rel, style, target)
 import Route
@@ -51,9 +51,10 @@ view base catalog work withCta =
     , div [ class "stats" ]
         [ stat "—" "いいね"
         , stat ("約" ++ String.fromInt work.minutes ++ "分") "プレイ時間"
+        , stat (String.fromInt (List.length work.episodes) ++ "話") "話数"
         , stat (String.fromInt work.endings) "結末"
-        , stat "縦" "画面"
         ]
+    , episodeList work
     , if work.mock then
         div [ class "box mock-note" ] [ text "これはモックの作品です。まだ遊べません。" ]
 
@@ -109,12 +110,18 @@ cta : Work -> Html msg
 cta work =
     div [ class "cta" ]
         [ button [ class "btn ghost", Html.Attributes.disabled True ] [ Ui.icon "heartO", text "いいね" ]
-        , if work.mock then
-            span [ class "btn off" ] [ text "準備中" ]
+        , case Catalog.firstPlayable work of
+            Just ep ->
+                Route.Works__Slug___Start { slug = work.slug }
+                    |> Route.link [ class "btn" ] [ Ui.icon "play", text (ep.label ++ "を無料で遊ぶ") ]
 
-          else
-            Route.Works__Slug___Start { slug = work.slug }
-                |> Route.link [ class "btn" ] [ Ui.icon "play", text "無料で遊ぶ" ]
+            Nothing ->
+                case Catalog.nextComing work of
+                    Just ep ->
+                        span [ class "btn off" ] [ text (Catalog.dateLabel ep.date ++ " ごろ公開") ]
+
+                    Nothing ->
+                        span [ class "btn off" ] [ text "準備中" ]
         ]
 
 
@@ -145,7 +152,7 @@ startSheet catalog work =
         , div [ class "sheet" ]
             [ div [ class "grip" ] []
             , h2 [] [ text work.title ]
-            , div [ class "subt" ] [ text "はじめる前に" ]
+            , div [ class "subt" ] [ text (Maybe.map (\e -> e.label ++ "「" ++ e.title ++ "」") (Catalog.firstPlayable work) |> Maybe.withDefault "はじめる前に") ]
             , div [ class "lst" ]
                 (warnLines
                     ++ [ line "sound" "" "音が出ます" "イヤホン推奨・ゲームの設定から音量を変えられます"
@@ -168,11 +175,81 @@ startSheet catalog work =
                     , small [] [ text "ゲームは作品ごとの頁（GitHub Pages）で開きます" ]
                     ]
                 ]
-            , case work.playUrl of
+            , case Catalog.firstPlayable work |> Maybe.andThen .playUrl of
                 Just url ->
                     a [ class "btn wide", href url ] [ Ui.icon "play", text "はじめる" ]
 
                 Nothing ->
                     span [ class "btn wide off" ] [ text "準備中" ]
+            ]
+        ]
+
+
+episodeList : Work -> Html msg
+episodeList work =
+    div [ class "box eps" ]
+        [ h4 [] [ text "エピソード", small [ class "muted" ] [ text ("全" ++ String.fromInt (List.length work.episodes) ++ "話・単話で配信") ] ]
+        , div [ class "ep-list" ] (List.indexedMap (episodeRow work) work.episodes)
+        ]
+
+
+episodeRow : Work -> Int -> Episode -> Html msg
+episodeRow work i ep =
+    let
+        body =
+            [ div [ class "ep-no" ] [ text ep.label ]
+            , div [ class "ep-main" ]
+                [ div [ class "ep-title" ] [ text ep.title ]
+                , div [ class "ep-sub" ] [ text (Catalog.dateLabel ep.date ++ (if ep.coming then " 公開予定" else " 公開") ++ "・約" ++ String.fromInt ep.minutes ++ "分") ]
+                ]
+            ]
+    in
+    case Catalog.episodeState ep of
+        Free ->
+            Route.Works__Slug___Start { slug = work.slug }
+                |> Route.link [ class "ep" ] (body ++ [ span [ class "ep-tag free" ] [ text "無料" ] ])
+
+        Paid coins ->
+            Route.Works__Slug___Buy__N_ { slug = work.slug, n = String.fromInt (i + 1) }
+                |> Route.link [ class "ep" ] (body ++ [ span [ class "ep-tag paid" ] [ Ui.icon "coin", text (String.fromInt coins) ] ])
+
+        Coming date ->
+            div [ class "ep coming" ] (body ++ [ span [ class "ep-tag soon" ] [ text (Catalog.dateLabel date ++ "ごろ") ] ])
+
+        NotPlayable ->
+            div [ class "ep coming" ] (body ++ [ span [ class "ep-tag soon" ] [ text "準備中" ] ])
+
+
+{-| 購入のシート。課金はモックで、どのボタンも支払いを起こさない（押せる見た目にもしない）。 -}
+buySheet : Work -> Episode -> Html msg
+buySheet work ep =
+    div []
+        [ Route.Works__Slug_ { slug = work.slug } |> Route.link [ class "dim" ] []
+        , div [ class "sheet" ]
+            [ div [ class "grip" ] []
+            , div [ class "mock-pay" ]
+                [ Html.b [] [ text "これは課金のモックです" ]
+                , text "実際の支払い・コインの購入は一切発生しません。どのボタンを押しても請求されることはありません。"
+                ]
+            , h2 [] [ text work.title ]
+            , div [ class "subt" ] [ text (ep.label ++ "「" ++ ep.title ++ "」") ]
+            , div [ class "buy-row" ]
+                [ div [] [ small [] [ text "この話の価格" ], div [ class "big-coin" ] [ Ui.icon "coin", text (String.fromInt ep.price) ] ]
+                , div [] [ small [] [ text "持っているコイン" ], div [ class "big-coin dim-coin" ] [ Ui.icon "coin", text "0" ] ]
+                ]
+            , p [ class "muted center" ] [ text ("コインが " ++ String.fromInt ep.price ++ " 足りません（モック）") ]
+            , div [ class "packs" ]
+                ([ ( 100, "120" ), ( 300, "360" ), ( 550, "600" ), ( 1200, "1,220" ) ]
+                    |> List.map
+                        (\( c, yen ) ->
+                            div [ class "pack" ]
+                                [ span [ class "pack-coin" ] [ Ui.icon "coin", text (String.fromInt c) ]
+                                , span [ class "pack-yen" ] [ text ("¥" ++ yen) ]
+                                , span [ class "pack-mock" ] [ text "モック" ]
+                                ]
+                        )
+                )
+            , span [ class "btn wide off" ] [ Ui.icon "lock", text "購入はできません（モック）" ]
+            , p [ class "muted center small" ] [ text "価格と話数は見た目を確かめるための仮の値です" ]
             ]
         ]

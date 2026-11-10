@@ -101,6 +101,7 @@ view app _ =
             [ div []
                 [ Ui.shelf "今すぐ遊べる" "もっと見る ›" (playable |> List.map (\w -> card (badgeOf w) w))
                 , Ui.shelf "5分〜10分で読める" "もっと見る ›" (catalog.works |> List.filter (\w -> w.minutes <= 10) |> List.map (card Nothing))
+                , Ui.shelf "近日公開" "カレンダー ›" (comingSoon catalog |> List.map (card Nothing))
                 , authorsRow base catalog
                 , Ui.shelf "これから（モック）" "" (mocks |> List.map (card Nothing))
                 ]
@@ -192,9 +193,18 @@ ranking base catalog works =
         ]
 
 
+comingSoon : Catalog.Catalog -> List Work
+comingSoon catalog =
+    catalog.works
+        |> List.filterMap (\w -> Catalog.nextComing w |> Maybe.map (\e -> ( e.date, w )))
+        |> List.sortBy Tuple.first
+        |> List.map Tuple.second
+
+
 footer : Html msg
 footer =
     Html.footer [ class "foot" ]
-        [ Route.Guidelines |> Route.link [] [ text "配信ガイドライン" ]
+        [ p [ class "mock-pay-foot" ] [ text "有料の話・コインは見た目を確かめるためのモックです。実際の支払いは一切発生しません。" ]
+        , Route.Guidelines |> Route.link [] [ text "配信ガイドライン" ]
         , span [] [ text "ノベルゲームシェルフ（試作）" ]
         ]

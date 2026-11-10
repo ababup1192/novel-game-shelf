@@ -26,4 +26,6 @@ devbox run -- bash scripts/build-pages.sh   # GitHub Pages 向けの書き出し
 | 見た目 | `style.css` |
 
 注意の札は `blood` `loud` `flash` `blade` `jumpscare` のどれか（それ以外はビルドが止まる）。
+作品の `episodes` は単話の一覧（`label` 第1話 など・`price` コイン数で 0 は無料・`date` 公開日か予定日・`coming` 公開前）。
+有料の話とコインは見た目だけのモックで、購入の画面のボタンは押せない（支払いは起きない）。
 `mock: true` の作品は「モック」の札が付き、遊ぶボタンが「準備中」になる。

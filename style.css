@@ -297,3 +297,42 @@ body{font-family:var(--round);background-color:var(--bg);
 .toc,.tbl{border:2px solid var(--ink);box-shadow:0 4px 0 var(--ink)}
 .foot a{color:var(--accent)}
 .cover.title-v .badge.mock{top:auto;bottom:8px}
+
+/* ── 単話・コイン（モック） ── */
+.coins{display:inline-flex;align-items:center;gap:4px;height:30px;padding:0 10px 0 6px;border-radius:999px;background:#fff;border:2px solid var(--ink);font:900 14px var(--round);box-shadow:0 2px 0 var(--ink)}
+.coins svg,.ep-tag svg,.big-coin svg,.pack-coin svg{width:18px;height:18px;flex:none}
+.cover .badge.price{left:auto;right:6px;top:auto;bottom:8px;background:var(--sun);color:var(--ink);border-color:var(--ink);transform:rotate(4deg)}
+.cover.title-b .badge.price{top:8px;bottom:auto}
+.meta .next{color:var(--sky);font-weight:800}
+.eps h4{justify-content:space-between}
+.eps h4 small{font-weight:700}
+.ep-list{display:grid;gap:8px}
+.ep{display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid var(--line);border-radius:14px;background:#fff;box-shadow:0 3px 0 var(--line)}
+a.ep:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
+.ep.coming{background:#faf7f2;border-style:dashed;box-shadow:none}
+.ep-no{flex:none;min-width:64px;font:900 13px var(--round);color:var(--accent)}
+.ep.coming .ep-no{color:var(--sub)}
+.ep-main{flex:1;min-width:0}
+.ep-title{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ep-sub{font-size:11px;color:var(--sub)}
+.ep-tag{flex:none;display:inline-flex;align-items:center;gap:3px;font:900 12px var(--round);padding:3px 10px;border-radius:999px;border:2px solid var(--ink)}
+.ep-tag.free{background:var(--mint);color:#fff;border-color:#1f8a66}
+.ep-tag.paid{background:#fff8e1;color:var(--ink)}
+.ep-tag.soon{background:#fff;color:var(--sky);border-color:var(--sky);border-style:dashed}
+.mock-pay{background:#fff0ee;border:2px solid var(--accent);border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.6;margin-bottom:12px}
+.mock-pay b{display:block;color:var(--accent);font-size:14px}
+.buy-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px}
+.buy-row>div{background:#fffdf8;border:2px solid var(--line);border-radius:14px;padding:10px;text-align:center}
+.buy-row small{color:var(--sub);font-weight:700}
+.big-coin{display:flex;align-items:center;justify-content:center;gap:6px;font:900 26px var(--round)}
+.big-coin svg{width:26px;height:26px}
+.dim-coin{color:var(--sub)}
+.center{text-align:center}
+.small{font-size:11px}
+.packs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 14px}
+.pack{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px;border:2px dashed var(--line);border-radius:14px;background:#fff;opacity:.85}
+.pack-coin{display:inline-flex;align-items:center;gap:4px;font:900 17px var(--round)}
+.pack-yen{font-size:12px;color:var(--sub);text-decoration:line-through}
+.pack-mock{position:absolute;top:-9px;right:8px;font:900 10px var(--round);background:var(--ink);color:#fff;border-radius:999px;padding:1px 7px}
+.mock-pay-foot{margin:0 0 6px;padding:8px 12px;border:2px dashed var(--accent);border-radius:12px;color:var(--accent);font-weight:700;text-align:center;max-width:420px}
+.btn svg{flex:none}

@@ -2,11 +2,20 @@ module Catalog exposing
     ( Author
     , Catalog
     , Cover
+    , Episode
+    , EpisodeState(..)
     , Hero
     , TitlePlacement(..)
     , Warning(..)
     , Work
     , authorOf
+    , dateLabel
+    , episodeState
+    , findEpisode
+    , firstPlayable
+    , hasPaid
+    , nextComing
+    , priceLabel
     , findAuthor
     , findWork
     , load
@@ -45,7 +54,81 @@ type alias Work =
     , publishedAt : String
     , tags : List String
     , mock : Bool
+    , episodes : List Episode
     }
+
+
+{-| 単話で配る 1 話。price は「コイン」の数（0 なら無料）。
+coming は公開前（date は公開予定日）。課金はモックで、コインは実際には売り買いしない。
+-}
+type alias Episode =
+    { label : String
+    , title : String
+    , minutes : Int
+    , price : Int
+    , playUrl : Maybe String
+    , date : String
+    , coming : Bool
+    }
+
+
+type EpisodeState
+    = Free
+    | Paid Int
+    | Coming String
+    | NotPlayable
+
+
+episodeState : Episode -> EpisodeState
+episodeState ep =
+    if ep.coming then
+        Coming ep.date
+
+    else if ep.price > 0 then
+        Paid ep.price
+
+    else if ep.playUrl == Nothing then
+        NotPlayable
+
+    else
+        Free
+
+
+{-| "2026-11-23" → "11/23"。年は同じ年の中の予定しか出さないので省く。 -}
+dateLabel : String -> String
+dateLabel iso =
+    case String.split "-" iso of
+        [ _, m, d ] ->
+            String.fromInt (Maybe.withDefault 0 (String.toInt m)) ++ "/" ++ String.fromInt (Maybe.withDefault 0 (String.toInt d))
+
+        _ ->
+            iso
+
+
+priceLabel : Int -> String
+priceLabel coins =
+    String.fromInt coins ++ " コイン"
+
+
+firstPlayable : Work -> Maybe Episode
+firstPlayable work =
+    work.episodes |> List.filter (\e -> episodeState e == Free) |> List.head
+
+
+nextComing : Work -> Maybe Episode
+nextComing work =
+    work.episodes |> List.filter .coming |> List.head
+
+
+hasPaid : Work -> Bool
+hasPaid work =
+    List.any (\e -> e.price > 0) work.episodes
+
+
+{-| 話の番号は一覧の何番目か（1 始まり）。URL に label の日本語を入れないため。 -}
+findEpisode : Int -> Work -> Maybe Episode
+findEpisode n work =
+    work.episodes |> List.drop (n - 1) |> List.head
 
 
 type alias Cover =
@@ -203,6 +286,19 @@ workDecoder =
         |> field "publishedAt" Decode.string
         |> field "tags" (Decode.list Decode.string)
         |> field "mock" Decode.bool
+        |> field "episodes" (Decode.list episodeDecoder)
+
+
+episodeDecoder : Decoder Episode
+episodeDecoder =
+    Decode.succeed Episode
+        |> field "label" Decode.string
+        |> field "title" Decode.string
+        |> field "minutes" Decode.int
+        |> field "price" Decode.int
+        |> field "playUrl" (Decode.nullable Decode.string)
+        |> field "date" Decode.string
+        |> field "coming" Decode.bool
 
 
 coverDecoder : Decoder Cover

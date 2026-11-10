@@ -39,7 +39,7 @@ route : StatelessRoute RouteParams Data ActionData
 route =
     RouteBuilder.preRender
         { head = head
-        , pages = Catalog.load |> BackendTask.map (.works >> List.filter (\w -> not w.mock) >> List.map (\w -> { slug = w.slug }))
+        , pages = Catalog.load |> BackendTask.map (.works >> List.filter (\w -> Catalog.firstPlayable w /= Nothing) >> List.map (\w -> { slug = w.slug }))
         , data = \_ -> BackendTask.succeed {}
         }
         |> RouteBuilder.buildNoState { view = view }

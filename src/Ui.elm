@@ -47,6 +47,7 @@ header base =
                 , Route.Guidelines |> Route.link [] [ text "ガイドライン" ]
                 ]
             , div [ class "sp" ] []
+            , span [ class "coins", Html.Attributes.title "コインはモックです（購入できません）" ] [ icon "coin", text "0" ]
             , span [ class "ic" ] [ icon "search" ]
             , span [ class "ic" ] [ icon "bell" ]
             ]
@@ -160,9 +161,20 @@ bookCard base catalog maybeBadge work =
         author =
             Catalog.authorOf catalog work
 
+        priceBadge =
+            if Catalog.hasPaid work && Catalog.firstPlayable work /= Nothing then
+                Just (span [ class "badge price" ] [ text "1話無料" ])
+
+            else if Catalog.hasPaid work then
+                Just (span [ class "badge price" ] [ text "有料" ])
+
+            else
+                Nothing
+
         extra =
             List.filterMap identity
                 [ maybeBadge |> Maybe.map (\( l, n ) -> badge l n)
+                , priceBadge
                 , if work.mock then
                     Just (span [ class "badge mock" ] [ text "モック" ])
 
@@ -176,9 +188,15 @@ bookCard base catalog maybeBadge work =
             , div [ class "bt" ] [ text work.title ]
             , div [ class "ba" ] [ text author.name ]
             , div [ class "meta" ]
-                [ span [] [ text ("約" ++ String.fromInt work.minutes ++ "分") ]
-                , span [] [ text work.age ]
-                ]
+                (case Catalog.nextComing work of
+                    Just ep ->
+                        [ span [ class "next" ] [ text (Catalog.dateLabel ep.date ++ " " ++ ep.label) ] ]
+
+                    Nothing ->
+                        [ span [] [ text ("全" ++ String.fromInt (List.length work.episodes) ++ "話") ]
+                        , span [] [ text work.age ]
+                        ]
+                )
             ]
 
 
@@ -273,6 +291,16 @@ icon name =
 
         "chev" ->
             stroke [ "M9 6l6 6-6 6" ]
+
+        "coin" ->
+            Svg.svg [ SA.viewBox "0 0 24 24" ]
+                [ Svg.circle [ SA.cx "12", SA.cy "12", SA.r "10", SA.fill "#ffc83d", SA.stroke "#b8860b", SA.strokeWidth "2" ] []
+                , Svg.circle [ SA.cx "12", SA.cy "12", SA.r "5.5", SA.fill "none", SA.stroke "#b8860b", SA.strokeWidth "1.8" ] []
+                ]
+
+        "lock" ->
+            Svg.svg [ SA.viewBox "0 0 24 24", SA.fill "none", SA.stroke "currentColor", SA.strokeWidth "2" ]
+                [ Svg.rect [ SA.x "5", SA.y "11", SA.width "14", SA.height "10", SA.rx "2" ] [], Svg.path [ SA.d "M8 11V7a4 4 0 018 0v4" ] [] ]
 
         "external" ->
             stroke [ "M14 4h6v6", "M20 4l-9 9", "M18 14v6H4V6h6" ]
