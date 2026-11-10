@@ -336,3 +336,7 @@ a.ep:active{transform:translateY(2px);box-shadow:0 1px 0 var(--line)}
 .pack-mock{position:absolute;top:-9px;right:8px;font:900 10px var(--round);background:var(--ink);color:#fff;border-radius:999px;padding:1px 7px}
 .mock-pay-foot{margin:0 0 6px;padding:8px 12px;border:2px dashed var(--accent);border-radius:12px;color:var(--accent);font-weight:700;text-align:center;max-width:420px}
 .btn svg{flex:none}
+
+/* 下に固定した帯（タブバー・遊ぶボタン）の裏に最後の箱が隠れないよう、帯の高さ＋ホームバーの分だけ空ける */
+body{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
+.foot{padding-bottom:16px}
