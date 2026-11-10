@@ -196,7 +196,7 @@ a{color:inherit;text-decoration:none}
 /* ── サイト版の足し分 ── */
 .top{background:rgba(255,255,255,.94)}
 .logo{display:flex;align-items:center}
-.logo img{height:32px;width:auto;display:block}
+.logo img{height:34px;width:auto;display:block}
 .sp{flex:1}
 .ic svg{width:22px;height:22px}
 .tabbar a svg{width:24px;height:24px}
@@ -222,3 +222,78 @@ a{color:inherit;text-decoration:none}
 .rank-row .cover{width:56px}
 .hero-card .art{background-color:#111}
 .dim{display:block}
+
+/* ── ゲームらしさ（丸い字・押せるボタン・台詞ウィンドウ・ステッカー） ── */
+:root{
+  --round:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN","Hiragino Sans",sans-serif;
+  --bg:#fff7ec; --soft:#ffeedd; --line:#f0dcc6; --sun:#ffc83d; --sky:#3d8bff; --mint:#2fbf8f;
+}
+body{font-family:var(--round);background-color:var(--bg);
+  background-image:radial-gradient(rgba(217,52,43,.07) 1.2px,transparent 1.3px);background-size:18px 18px}
+.top{background:rgba(255,255,255,.96);border-bottom:3px solid var(--ink)}
+.tabs a{font-family:var(--round);font-weight:800;border:2px solid transparent}
+.tabs a:not(.on){background:#fff;border-color:var(--line);color:var(--ink)}
+.tabs a.on{background:var(--accent);box-shadow:0 3px 0 #8f1d17}
+
+.sec-h h3{font-family:var(--round);font-weight:900;font-size:18px;display:flex;align-items:center;gap:8px}
+.sec-h h3::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--accent);transform:rotate(45deg);box-shadow:3px 3px 0 var(--sun)}
+.sec-h a{font-weight:800;color:var(--accent)}
+
+.hero-card{border:3px solid var(--ink);box-shadow:0 6px 0 var(--ink);border-radius:18px}
+.hero-card::after{background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,.35))}
+.hero-card .txt{left:12px;right:12px;bottom:12px;background:rgba(14,14,20,.88);border:2px solid #fff;border-radius:12px;padding:10px 12px 14px;box-shadow:0 0 0 3px rgba(14,14,20,.88)}
+.hero-card .txt::after{content:"▼";position:absolute;right:10px;bottom:4px;font-size:11px;color:var(--sun);animation:blink 1s steps(2) infinite}
+.hero-card h2{font-size:20px}
+.hero-card .lbl{position:absolute;top:-14px;left:10px;margin:0;background:var(--sun);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:1px 10px;font-weight:900;transform:rotate(-4deg)}
+@keyframes blink{50%{opacity:0}}
+.dots i.on{background:var(--accent)}
+
+.cover{border-radius:12px;border:3px solid #fff;box-shadow:0 4px 0 rgba(24,24,27,.85),0 6px 14px rgba(0,0,0,.18);transition:transform .15s}
+.book:hover .cover,.book:active .cover{transform:translateY(-3px) rotate(-1.5deg)}
+.cover .badge{border:2px solid #fff;border-radius:999px;padding:1px 8px;transform:rotate(-6deg);top:8px;left:6px;font-weight:900}
+.cover .badge.new{background:var(--sky)}
+.cover .badge.mock{background:rgba(24,24,27,.8)}
+.book .bt{font-family:var(--round);font-weight:900}
+
+.av{border:3px solid var(--ink);box-shadow:0 3px 0 var(--ink)}
+.au{font-family:var(--round)}
+
+.rank-row{border:2px solid var(--ink);box-shadow:0 4px 0 var(--ink);border-radius:14px}
+.rank-no{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:900 17px var(--round);background:#eee;color:var(--ink);border:2px solid var(--ink);flex:none}
+.rank-no.r1{background:var(--sun);color:var(--ink)}
+.rank-no.r2{background:#dfe6ee;color:var(--ink)}
+.rank-no.r3{background:#f2b98a;color:var(--ink)}
+.chip{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+
+.btn{border-radius:999px;font-family:var(--round);font-weight:900;letter-spacing:.04em;box-shadow:0 5px 0 #8f1d17;border:2px solid var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 #8f1d17}
+.btn.ghost{border-radius:16px;box-shadow:0 4px 0 var(--line);border-color:var(--line);background:#fff}
+.btn.off{box-shadow:0 5px 0 #9a978f;border-color:#9a978f}
+.cta,.tabbar{border-top:3px solid var(--ink)}
+.tabbar a{font-family:var(--round);font-weight:800}
+.tabbar a.on{color:var(--accent)}
+
+.wk-head h1{font-size:28px;text-shadow:0 3px 0 rgba(0,0,0,.4)}
+.stats{border-bottom:3px solid var(--ink)}
+.stats b{font-family:var(--round);font-weight:900}
+.box{border-radius:16px;margin:12px;border:2px solid var(--line);box-shadow:0 3px 0 var(--line)}
+.box h4{font-family:var(--round);font-weight:900}
+.warn{border:2px solid #f3c27a;border-radius:999px}
+.age{border-radius:999px;background:var(--ink);color:#fff;padding:0 8px;border:0}
+
+.sheet{border-top:3px solid var(--ink);border-radius:24px 24px 0 0}
+.sheet h2{font-size:24px}
+.sheet .subt{font-family:var(--round);font-weight:900;color:var(--accent);letter-spacing:.2em}
+.li .i{border:2px solid var(--line);border-radius:12px}
+.li .i.w{border-color:#f3c27a}
+.msg{border:2px solid var(--ink);border-left:6px solid var(--accent);border-radius:12px;background:#fff;position:relative}
+.msg::after{content:"▼";position:absolute;right:10px;bottom:6px;font-size:10px;color:var(--accent);animation:blink 1s steps(2) infinite}
+.chk{border:2px dashed var(--line);border-radius:14px;background:#fffdf8}
+
+.au-head{border-bottom:3px solid var(--ink)}
+.news div{border:2px solid var(--line);border-radius:14px;box-shadow:0 3px 0 var(--line)}
+.doc h2{border-left:none;padding-left:0;display:flex;align-items:center;gap:8px;font-family:var(--round);font-weight:900}
+.doc h2::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--accent);transform:rotate(45deg);box-shadow:3px 3px 0 var(--sun)}
+.toc,.tbl{border:2px solid var(--ink);box-shadow:0 4px 0 var(--ink)}
+.foot a{color:var(--accent)}
+.cover.title-v .badge.mock{top:auto;bottom:8px}

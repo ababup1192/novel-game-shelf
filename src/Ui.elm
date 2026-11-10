@@ -124,7 +124,14 @@ cover base work extra =
                     div [ class "t" ] [ text work.title ]
     in
     div
-        [ class "cover"
+        [ class
+            (case c.title of
+                Vertical ->
+                    "cover title-v"
+
+                Bottom ->
+                    "cover title-b"
+            )
         , style "background-image" (String.join ", " layers)
         , style "background-size" bgSize
         , style "background-position" bgPos
