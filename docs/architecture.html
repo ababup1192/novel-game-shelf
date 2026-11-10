@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ノベルゲームシェルフの構成と費用</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700;800&family=Noto+Sans+JP:wght@400;700&display=swap">
+<style>
+:root{
+  /* サイト本体の配色（墨・朱・紙）に合わせる。図は左から右へ「人 → Cloudflare → VPS」 */
+  --paper:#fbf8f3; --card:#ffffff; --ink:#18181b; --sub:#5f5d66; --line:#e3ddd3;
+  --accent:#d9342b; --cf:#f6821f; --cf-bg:#fff6ec; --vps-bg:#eef3fb; --vps:#3d6fb8;
+  --display:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;
+  --body:"Noto Sans JP","Hiragino Sans",sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#16161a; --card:#1f1f25; --ink:#ecebe8; --sub:#a9a6b0; --line:#34333b;
+    --accent:#ff6a5f; --cf:#ff9d4d; --cf-bg:#2a2118; --vps-bg:#18202c; --vps:#7fa8e6; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#16161a; --card:#1f1f25; --ink:#ecebe8; --sub:#a9a6b0; --line:#34333b;
+  --accent:#ff6a5f; --cf:#ff9d4d; --cf-bg:#2a2118; --vps-bg:#18202c; --vps:#7fa8e6; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.75 var(--body)}
+main{max-width:1040px;margin:0 auto;padding:28px 16px 64px;display:grid;gap:36px}
+h1,h2{font-family:var(--display);text-wrap:balance;margin:0}
+h1{font-size:28px}
+h2{font-size:20px;display:flex;align-items:center;gap:10px}
+h2::before{content:"";width:10px;height:10px;border-radius:2px;background:var(--accent);transform:rotate(45deg)}
+.lead{color:var(--sub);max-width:68ch;margin:6px 0 0}
+section{display:grid;gap:12px}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;overflow-x:auto}
+figure svg{display:block;width:100%;min-width:760px;height:auto;color:var(--ink)}
+figcaption{color:var(--sub);font-size:13px;margin-top:10px;max-width:80ch}
+.wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px}
+table{border-collapse:collapse;width:100%;min-width:680px;font-variant-numeric:tabular-nums}
+th,td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;font-size:14px}
+th{font-weight:700;background:color-mix(in srgb,var(--paper) 70%,var(--card));white-space:nowrap}
+td.num{text-align:right;white-space:nowrap}
+tr.total td{font-weight:700;border-top:2px solid var(--ink);border-bottom:none}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:1px 9px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.pill.free{color:#1d7a4f;border-color:#9fd6b9}
+.pill.paid{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+.note{color:var(--sub);font-size:13px;max-width:80ch;margin:0}
+ul.points{margin:0;padding-left:20px;display:grid;gap:4px}
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>ノベルゲームシェルフの構成と費用</h1>
+  <p class="lead">今の試作（GitHub Pages だけ）と、作品データを nextcms で管理し、作者が自分の作品を直せるようにした目標の構成。公開サイトとゲームは静的なまま Cloudflare から配る。nextcms は既に本番で動いている物（さくらの VPS 4 GB・cms.ababup.dev）に別のプロジェクトとして足すので、箱もドメインも増えない。</p>
+</header>
+
+<section>
+  <h2>今の試作</h2>
+  <figure>
+    <svg viewBox="0 0 1000 170" role="img" aria-label="今は読者が GitHub Pages のシェルフを開き、はじめるで各作品の GitHub Pages へ移る。作品データはリポジトリの JSON で、手元で書き出して push している">
+      <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker></defs>
+      <g font-size="13" fill="currentColor" stroke="currentColor">
+        <rect x="20" y="50" width="150" height="60" rx="10" fill="none" stroke-width="1.5"/>
+        <text x="95" y="76" text-anchor="middle" stroke="none" font-weight="700">読者</text>
+        <text x="95" y="96" text-anchor="middle" stroke="none" font-size="11">スマホのブラウザ</text>
+        <rect x="290" y="40" width="250" height="80" rx="10" fill="none" stroke-width="1.5"/>
+        <text x="415" y="70" text-anchor="middle" stroke="none" font-weight="700">GitHub Pages（シェルフ）</text>
+        <text x="415" y="90" text-anchor="middle" stroke="none" font-size="11">elm-pages で書き出した静的な頁</text>
+        <text x="415" y="106" text-anchor="middle" stroke="none" font-size="11">content/works.json を焼き込み</text>
+        <rect x="660" y="40" width="320" height="80" rx="10" fill="none" stroke-width="1.5"/>
+        <text x="820" y="70" text-anchor="middle" stroke="none" font-weight="700">各作品の GitHub Pages</text>
+        <text x="820" y="90" text-anchor="middle" stroke="none" font-size="11">kankan / haioku-live / blood-scale</text>
+        <text x="820" y="106" text-anchor="middle" stroke="none" font-size="11">export-web の書き出し（WasmGC）</text>
+        <line x1="170" y1="80" x2="288" y2="80" stroke-width="1.5" marker-end="url(#a1)"/>
+        <text x="229" y="72" text-anchor="middle" stroke="none" font-size="11">頁を開く</text>
+        <line x1="540" y1="80" x2="658" y2="80" stroke-width="1.5" marker-end="url(#a1)"/>
+        <text x="599" y="72" text-anchor="middle" stroke="none" font-size="11">はじめる</text>
+        <text x="415" y="150" text-anchor="middle" stroke="none" font-size="11" fill="var(--sub)">作品・作者を足すにはリポジトリの JSON を直して書き出し直す</text>
+      </g>
+    </svg>
+    <figcaption>データの更新は手作業で、作者が自分で直す入口は無い。いいね・感想もまだ動かない。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>目標の構成</h2>
+  <figure>
+    <svg viewBox="0 0 1010 610" role="img" aria-label="読者は Cloudflare の静的配信から頁を、R2 からゲームを読む。作者は Access を通って Worker API（BFF）へ入り、BFF が R2 にゲームを置き、Cloudflare のプロキシ経由で nextcms の管理 API に下書きを書く。管理者は nextcms の管理画面で公開する。公開の Webhook で GitHub Actions がコンテンツ API を読んで書き出し、Cloudflare へ配り直す">
+      <defs>
+        <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="currentColor"/></marker>
+        <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="var(--accent)"/></marker>
+      </defs>
+      <!-- 区画 -->
+      <rect x="220" y="40" width="420" height="440" rx="16" fill="var(--cf-bg)" stroke="var(--cf)" stroke-width="1.5"/>
+      <text x="236" y="64" font-size="13" font-weight="700" fill="var(--cf)">Cloudflare（無料枠）</text>
+      <rect x="680" y="150" width="300" height="270" rx="16" fill="var(--vps-bg)" stroke="var(--vps)" stroke-width="1.5"/>
+      <text x="696" y="174" font-size="13" font-weight="700" fill="var(--vps)">さくらの VPS 4 GB（既存）</text>
+
+      <g font-size="13" fill="currentColor" stroke="currentColor">
+        <!-- 人 -->
+        <rect x="20" y="70" width="150" height="60" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="95" y="96" text-anchor="middle" stroke="none" font-weight="700">読者</text>
+        <text x="95" y="115" text-anchor="middle" stroke="none" font-size="11">ブラウザ / アプリ</text>
+        <rect x="20" y="200" width="150" height="60" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="95" y="226" text-anchor="middle" stroke="none" font-weight="700">ゲーム作者</text>
+        <text x="95" y="245" text-anchor="middle" stroke="none" font-size="11">シェルフの作者画面</text>
+        <rect x="780" y="60" width="160" height="56" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="860" y="84" text-anchor="middle" stroke="none" font-weight="700">管理者（あなた）</text>
+        <text x="860" y="102" text-anchor="middle" stroke="none" font-size="11">nextcms の管理画面</text>
+
+        <!-- Cloudflare の中 -->
+        <rect x="250" y="80" width="180" height="70" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="340" y="106" text-anchor="middle" stroke="none" font-weight="700">静的アセット配信</text>
+        <text x="340" y="125" text-anchor="middle" stroke="none" font-size="11">シェルフの全頁（elm-pages）</text>
+        <text x="340" y="140" text-anchor="middle" stroke="none" font-size="11">作者画面（SPA）</text>
+        <rect x="460" y="80" width="160" height="70" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="540" y="106" text-anchor="middle" stroke="none" font-weight="700">R2</text>
+        <text x="540" y="125" text-anchor="middle" stroke="none" font-size="11">ゲームの書き出し</text>
+        <text x="540" y="140" text-anchor="middle" stroke="none" font-size="11">play/&lt;slug&gt;/&lt;版&gt;/</text>
+        <rect x="250" y="200" width="130" height="56" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="315" y="224" text-anchor="middle" stroke="none" font-weight="700">Access</text>
+        <text x="315" y="243" text-anchor="middle" stroke="none" font-size="11">メールのワンタイム</text>
+        <rect x="250" y="290" width="180" height="76" rx="10" fill="var(--card)" stroke="var(--accent)" stroke-width="2"/>
+        <text x="340" y="316" text-anchor="middle" stroke="none" font-weight="700">Worker API</text>
+        <text x="340" y="335" text-anchor="middle" stroke="none" font-size="11">/api/likes・/api/comments</text>
+        <text x="340" y="351" text-anchor="middle" stroke="none" font-size="11" fill="var(--accent)">/api/author（BFF）</text>
+        <rect x="250" y="400" width="180" height="56" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="340" y="424" text-anchor="middle" stroke="none" font-weight="700">D1</text>
+        <text x="340" y="443" text-anchor="middle" stroke="none" font-size="11">いいね・感想</text>
+
+        <!-- VPS の中 -->
+        <rect x="700" y="188" width="260" height="34" rx="8" fill="var(--card)" stroke-width="1.2"/>
+        <text x="830" y="210" text-anchor="middle" stroke="none" font-size="12">Cloudflare プロキシ → Caddy（CF の IP だけ通す）</text>
+        <rect x="700" y="238" width="260" height="62" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="830" y="262" text-anchor="middle" stroke="none" font-weight="700">nextcms（Flix / JVM）</text>
+        <text x="830" y="282" text-anchor="middle" stroke="none" font-size="11">cms.ababup.dev/p/novel-game-shelf/</text>
+        <rect x="700" y="330" width="120" height="56" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="760" y="354" text-anchor="middle" stroke="none" font-weight="700">PostgreSQL</text>
+        <text x="760" y="372" text-anchor="middle" stroke="none" font-size="11">作品・作者</text>
+        <rect x="840" y="330" width="120" height="56" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="900" y="354" text-anchor="middle" stroke="none" font-weight="700">backup</text>
+        <text x="900" y="372" text-anchor="middle" stroke="none" font-size="11">毎日 R2 へ控え</text>
+
+        <!-- ビルド -->
+        <rect x="680" y="510" width="300" height="64" rx="10" fill="var(--card)" stroke-width="1.5"/>
+        <text x="830" y="536" text-anchor="middle" stroke="none" font-weight="700">GitHub Actions</text>
+        <text x="830" y="556" text-anchor="middle" stroke="none" font-size="11">elm-pages build → cf で配る</text>
+
+        <!-- 矢印: 読者 -->
+        <line x1="170" y1="100" x2="248" y2="100" stroke-width="1.5" marker-end="url(#a2)"/>
+        <text x="209" y="92" text-anchor="middle" stroke="none" font-size="11">頁</text>
+        <line x1="430" y1="115" x2="458" y2="115" stroke-width="1.5" marker-end="url(#a2)"/>
+        <text x="444" y="76" text-anchor="middle" stroke="none" font-size="11">はじめる</text>
+        <polyline points="170,120 236,120 236,328 248,328" fill="none" stroke-width="1.5" marker-end="url(#a2)"/>
+        <text x="228" y="250" text-anchor="end" stroke="none" font-size="11">いいね</text>
+        <text x="228" y="265" text-anchor="end" stroke="none" font-size="11">感想</text>
+        <line x1="340" y1="366" x2="340" y2="398" stroke-width="1.5" marker-end="url(#a2)"/>
+        <text x="348" y="387" stroke="none" font-size="11">書く</text>
+
+        <!-- 矢印: 作者 -->
+        <line x1="170" y1="228" x2="248" y2="228" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#a3)"/>
+        <text x="209" y="220" text-anchor="middle" stroke="none" font-size="11" fill="var(--accent)">ログイン</text>
+        <line x1="315" y1="256" x2="315" y2="288" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#a3)"/>
+        <polyline points="415,290 415,168 540,168 540,152" fill="none" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#a3)"/>
+        <text x="478" y="184" text-anchor="middle" stroke="none" font-size="11" fill="var(--accent)">ゲームを置く</text>
+        <line x1="430" y1="318" x2="698" y2="270" stroke="var(--accent)" stroke-width="1.8" marker-end="url(#a3)"/>
+        <text x="560" y="252" text-anchor="middle" stroke="none" font-size="11" fill="var(--accent)">管理 API で下書きを書く</text>
+        <text x="560" y="268" text-anchor="middle" stroke="none" font-size="11" fill="var(--accent)">（作者の作品だけ・公開はしない）</text>
+
+        <!-- 矢印: 管理者 -->
+        <line x1="860" y1="116" x2="860" y2="186" stroke-width="1.5" marker-end="url(#a2)"/>
+        <text x="868" y="150" stroke="none" font-size="11">公開・非公開</text>
+
+        <!-- 矢印: 書き出しの流れ -->
+        <line x1="830" y1="300" x2="830" y2="508" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a2)"/>
+        <text x="824" y="452" text-anchor="end" stroke="none" font-size="11">Webhook</text>
+        <text x="824" y="467" text-anchor="end" stroke="none" font-size="11">（公開したら）</text>
+        <polyline points="968,510 968,270 962,270" fill="none" stroke-width="1.5" marker-end="url(#a2)"/>
+        <text x="962" y="452" text-anchor="end" stroke="none" font-size="11">コンテンツ API</text>
+        <text x="962" y="467" text-anchor="end" stroke="none" font-size="11">で読む</text>
+        <polyline points="980,542 1000,542 1000,22 340,22 340,78" fill="none" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#a2)"/>
+        <text x="660" y="16" text-anchor="middle" stroke="none" font-size="11">書き出しを配り直す（cf deploy）</text>
+      </g>
+    </svg>
+    <figcaption>朱色の線が作者の通り道。作者は nextcms に直接は入らず、Worker（BFF）が「この作品の作者か」と「直してよいフィールドか」を確かめてから管理 API を呼ぶ。公開は管理者だけ（nextcms の役割で、下書きは WRITER、公開は EDITOR 以上）。表紙などの asset は本番の設定どおり R2（nextcms-assets）に置く。読者が触るのは Cloudflare だけなので、VPS が落ちてもサイトとゲームは読める。</figcaption>
+  </figure>
+  <ul class="points">
+    <li>シェルフは既存の nextcms に別のプロジェクト（slug <code>novel-game-shelf</code>）として足す。作品データ（作者・あらすじ・注意の札・遊ぶ URL・表紙）はその中の <code>works</code> と <code>authors</code> 型に置く。公開と非公開は nextcms の公開・取り下げそのもの。</li>
+    <li>ゲームの書き出し（100 前後のファイル）は CMS に入れず R2 へ。CMS には遊ぶ URL と版だけを持たせる。</li>
+    <li>いいね・感想は匿名で頻繁に書かれるので CMS に入れず D1 へ。</li>
+    <li>行ごとの権限（作者は自分の作品だけ）は、最初は BFF で確かめ、後で nextcms のロードマップ #22b に移す。</li>
+  </ul>
+</section>
+
+<section>
+  <h2>費用の概算（月額）</h2>
+  <div class="wrap">
+  <table>
+    <thead><tr><th>項目</th><th>何に使うか</th><th>今の試作</th><th>目標（nextcms 込み）</th><th>無料で収まる目安</th></tr></thead>
+    <tbody>
+      <tr><td>GitHub Pages</td><td>今のシェルフと各作品</td><td class="num">0 円</td><td class="num">—</td><td>公開リポジトリなら無料</td></tr>
+      <tr><td>Workers 静的アセット</td><td>シェルフの全頁・作者画面</td><td class="num">—</td><td class="num"><span class="pill free">0 円</span></td><td>配信は回数無制限。1 版 20,000 ファイル・1 ファイル 25 MiB まで</td></tr>
+      <tr><td>Worker API</td><td>いいね・感想・作者の BFF</td><td class="num">—</td><td class="num"><span class="pill free">0 円</span></td><td>1 日 10 万回まで。超えたら有料プラン 月 5 ドル（約 750 円）</td></tr>
+      <tr><td>D1</td><td>いいね・感想</td><td class="num">—</td><td class="num"><span class="pill free">0 円</span></td><td>読み 1 日 500 万行・書き 1 日 10 万行・5 GB</td></tr>
+      <tr><td>R2</td><td>ゲームの書き出し</td><td class="num">—</td><td class="num"><span class="pill free">0 円</span></td><td>10 GB まで（1 本 20 MB なら約 500 本）。転送量は無料</td></tr>
+      <tr><td>Access・Turnstile・WAF</td><td>作者のログイン・いたずら止め・VPS の前段</td><td class="num">—</td><td class="num"><span class="pill free">0 円</span></td><td>Access は 50 人まで無料（作者が 50 人を超えたら別のログインへ）</td></tr>
+      <tr><td>GitHub Actions</td><td>書き出しと配り直し</td><td class="num">—</td><td class="num"><span class="pill free">0 円</span></td><td>公開リポジトリなら無料</td></tr>
+      <tr><td>VPS</td><td>nextcms・PostgreSQL・backup・Caddy</td><td class="num">—</td><td class="num"><span class="pill free">上乗せ 0 円</span></td><td>既存のさくらの VPS 4 GB に同居（今の実使用は JVM 1 つ 400 MB 前後）。月額はすでに払っている分で、ここには数えない</td></tr>
+      <tr><td>独自ドメイン</td><td>shelf.〜・play.〜 などのホスト名</td><td class="num">—</td><td class="num"><span class="pill free">上乗せ 0 円</span></td><td>既存の ababup.dev のサブドメインで足りる</td></tr>
+      <tr class="total"><td>合計</td><td></td><td class="num">0 円</td><td class="num">上乗せ 0 円</td><td>既存の VPS とドメインの費用は別</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="wrap">
+  <table>
+    <thead><tr><th>後で足す物</th><th>費用</th><th>いつ要るか</th></tr></thead>
+    <tbody>
+      <tr><td>Apple Developer Program</td><td class="num">年 約 1.3 万円（月 約 1,100 円）</td><td>Capacitor で iOS のアプリを出す時</td></tr>
+      <tr><td>Google Play の登録</td><td class="num">25 ドル（1 回だけ）</td><td>Android のアプリを出す時</td></tr>
+      <tr><td>Workers の有料プラン</td><td class="num">月 5 ドル（約 750 円）</td><td>Worker API が 1 日 10 万回を超えた時</td></tr>
+      <tr><td>VPS を 8 GB に上げる</td><td class="num">月 数千円の上乗せ（未確認）</td><td>負荷で heap が 1 GB を超え、切り替え中の JVM 2 つが 4 GB に収まらない時（RUNBOOK の目安）</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">1 ドル = 150 円、1 ユーロ = 165 円で換算。VPS の構成は nextcms の deploy/RUNBOOK.md の記録で、本番の /health が ok を返すことを 2026 年 11 月 10 日に確かめた。Cloudflare の無料枠は 2026 年 11 月に公式の文書で確かめた。ロゴを作った Codex（ChatGPT）は既に契約している物として入れていない。</p>
+</section>
+</main>
+</body>
+</html>

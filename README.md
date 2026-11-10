@@ -4,6 +4,7 @@
 elm-pages で全頁を静的に書き出す。ゲームそのものは各作品の GitHub Pages で開く。
 
 - 公開: https://ababup1192.github.io/novel-game-shelf/
+- 構成と今後の計画（nextcms・Cloudflare・作者画面・費用）: [docs/architecture.md](docs/architecture.md)
 
 ## 動かす
 
