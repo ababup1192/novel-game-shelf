@@ -169,7 +169,7 @@ startSheet catalog work =
                 [ span [ class "bx" ] [ Ui.icon "check" ]
                 , span []
                     [ text "はじめると "
-                    , Route.Guidelines |> Route.link [] [ text "配信ガイドライン" ]
+                    , Route.Guidelines |> Route.link [] [ text "配信ガイドライン（利用規約）" ]
                     , text " に同意したものとします"
                     , Html.br [] []
                     , small [] [ text "ゲームは作品ごとの頁（GitHub Pages）で開きます" ]
